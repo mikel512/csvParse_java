@@ -1,6 +1,6 @@
 package Models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class SalesJan2009 {
     Date _transactionDate;
