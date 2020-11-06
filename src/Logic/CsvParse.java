@@ -6,7 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Constructor;
-import java.sql.Date;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.IntStream;
@@ -14,7 +13,7 @@ import java.util.stream.Stream;
 
 
 /**
- * This class supports CSV text files to be parsed into a stream of objects off the specified type
+ * This class supports CSV text files to be parsed into a stream of objects of the specified type
  * <p>
  * By default CsvParse supports {@code Integer, Double, Character, String,} and {@code Boolean}
  * </p>
@@ -34,8 +33,7 @@ public class CsvParse<T> {
             Map.entry(Double.class, Double::parseDouble),
             Map.entry(Character.class, s -> s.charAt(0)),
             Map.entry(String.class, s -> s),
-            Map.entry(Boolean.class, Boolean::parseBoolean),
-            Map.entry(Date.class, Date::valueOf)
+            Map.entry(Boolean.class, Boolean::parseBoolean)
     ));
 
     private CsvParse(BufferedReader reader, Class<T> clazz){
@@ -75,7 +73,7 @@ public class CsvParse<T> {
                 .mapToObj(i -> PARSERS.get(ctorParams[i]).apply(split[i]))
                 .toArray();
         try {
-            return clazz.cast(args);
+            return (T) annotatedCtor.newInstance(args);
         } catch (Exception e){
             e.printStackTrace();
         }
