@@ -4,8 +4,8 @@ import Logic.CsvParse;
 
 import java.sql.Date;
 
-class SacramentoCrimeJanuary {
-    Date cdatetime;      // Date
+public class SacramentoCrimeJanuary {
+    String cdatetime;      // Date
     String address;
     Integer district;
     String beat;
@@ -16,7 +16,7 @@ class SacramentoCrimeJanuary {
     Double longitude;
 
     @CsvParse.CsvConstructor
-    public SacramentoCrimeJanuary(Date cdatetime, String address, Integer district,
+    public SacramentoCrimeJanuary(String cdatetime, String address, Integer district,
                                   String beat, Integer grid, String crimedescr, Integer ucr_ncic_code,
                                   Double latitude, Double longitude){
         this.cdatetime = cdatetime;
