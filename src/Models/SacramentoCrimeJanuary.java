@@ -1,29 +1,32 @@
 package Models;
 
+import Logic.CsvParse;
+
 import java.sql.Date;
 
-public class SacramentoCrimeJanuary {
-    Date _crimeDate;
-    String _address;
-    int _district;
-    String _beat;
-    int _grid;
-    String _crimeDescription;
-    int _ucrNcicCode;
-    int _latitude;
-    int _longitude;
+class SacramentoCrimeJanuary {
+    Date cdatetime;      // Date
+    String address;
+    Integer district;
+    String beat;
+    Integer grid;
+    String crimedescr;
+    Integer ucr_ncic_code;
+    Double latitude;
+    Double longitude;
 
-    public SacramentoCrimeJanuary(Date crimeDate, String address, int district,
-                                  String beat, int grid, String crimeDescription,
-                                  int ucrNcic, int latitude, int longitude){
-        _crimeDate = crimeDate;
-        _address = address;
-        _district = district;
-        _beat = beat;
-        _grid = grid;
-        _crimeDescription = crimeDescription;
-        _ucrNcicCode = ucrNcic;
-        _latitude = latitude;
-        _longitude = longitude;
+    @CsvParse.CsvConstructor
+    public SacramentoCrimeJanuary(Date cdatetime, String address, Integer district,
+                                  String beat, Integer grid, String crimedescr, Integer ucr_ncic_code,
+                                  Double latitude, Double longitude){
+        this.cdatetime = cdatetime;
+        this.address = address;
+        this.district = district;
+        this.beat = beat;
+        this.grid = grid;
+        this.crimedescr = crimedescr;
+        this.ucr_ncic_code = ucr_ncic_code;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }
