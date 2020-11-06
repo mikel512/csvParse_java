@@ -1,23 +1,47 @@
-package Logic;
+package utilities;
 
-import Models.ContactPoint;
-import Models.Distribution;
-import Models.Publisher;
-import Models.SbaData;
+import models.ContactPoint;
+import models.Distribution;
+import models.Publisher;
+import models.SbaData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
-public class SbaParse {
+/**
+ * This class supports serializing a JSONObject into SbaData objects
+ */
+public class SbaDataSerial {
 
-    public JSONObject getJsonObject(){
+    private JSONObject object;
+
+    private SbaDataSerial(JSONObject object) {
+        this.object = object;
+    }
+
+    /**
+     * Creates a new SbaParse instance from the specified parser
+     * @param object a {@link JSONObject} containing {@code n} JSON objects
+     * @return a new SbaParse instance
+     */
+    public static SbaDataSerial newInstance(JSONObject object) {
+        return new SbaDataSerial(object);
+    }
+
+    /**
+     * Turns each entry in the dataset to an instance of type {@code SbaData}
+     * @return a List of instances of type {@code SbaData} corresponding to each entry of the dataset
+     */
+    public List<SbaData> objects(){
+        return getSbaDataObjects();
+    }
+
+/*
+    private JSONObject getJsonObject() {
         JSONParser p = new JSONParser();
         JSONObject json = new JSONObject();
         try{
@@ -27,12 +51,12 @@ public class SbaParse {
         catch (IOException | ParseException e){
             e.printStackTrace();
         }
-        return json;
+        return null;
     }
+*/
 
-    public ArrayList<SbaData> returnSbaDataObjs(){
+    private List<SbaData> getSbaDataObjects() {
         ArrayList<SbaData> data = new ArrayList<>();
-        JSONObject object = getJsonObject();
         JSONArray dataset = (JSONArray) object.get("dataset");
 
         Iterator it = dataset.iterator();
