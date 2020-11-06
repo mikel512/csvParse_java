@@ -1,15 +1,15 @@
 package Models;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SbaData {
     String _title;
     String _description;
-    Date _modified;
+    String _modified;       // if not null parse to LocalDate
     String _accessLevel;
     String _identifier;
-    Date _issued;
+    String _issued;         // if not null parse to LocalDate
     String _landingPage;
     String _license;
     Publisher _publisher;
@@ -21,13 +21,14 @@ public class SbaData {
     String _bureauCode;
     String _programCode;
     ArrayList<String> _themes;
+    String _language;
 
-    public SbaData(String title, String description, Date modified,
-                   String accessLevel, String identifier, Date issued,
+    public SbaData(String title, String description, String modified,
+                   String accessLevel, String identifier, String issued,
                    String landingPage, String license, Publisher publisher,
                    String accrualPeriodicity, String isPartOf, ContactPoint contactPoint,
                    ArrayList<Distribution> distributions, ArrayList<String> keywords, String bureauCode,
-                   String programCode,ArrayList<String> themes){
+                   String programCode,ArrayList<String> themes, String language){
         _title = title;
         _description = description;
         _modified = modified;
@@ -45,7 +46,7 @@ public class SbaData {
         _bureauCode = bureauCode;
         _programCode = programCode;
         _themes = themes;
-
+        _language = language;
     }
 
 }
