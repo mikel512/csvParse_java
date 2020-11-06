@@ -1,6 +1,5 @@
-package Models;
+package models;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class SbaData {

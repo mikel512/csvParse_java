@@ -1,8 +1,6 @@
-package Models;
+package models;
 
-import Logic.CsvParse;
-
-import java.sql.Date;
+import utilities.CsvParse;
 
 public class SacramentoCrimeJanuary {
     String cdatetime;      // Date
