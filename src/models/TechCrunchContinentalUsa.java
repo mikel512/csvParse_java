@@ -1,8 +1,6 @@
 package models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -62,6 +60,8 @@ public class TechCrunchContinentalUsa implements java.io.Serializable {
         this.round = round;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "rec_no")
     public Long getId() {
         return id;

@@ -1,13 +1,12 @@
 package models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table (name = "salesjan2009")
 public class SalesJan implements java.io.Serializable{
+    private Long id;
     private Date transaction_date;
     private String product;
     private int price;
@@ -71,6 +70,14 @@ public class SalesJan implements java.io.Serializable{
 
     public void setPayment_type(String payment_type) {
         this.payment_type = payment_type;
+    }
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "sale_no")
+    public Long getId() {
+        return id;
     }
 
     @Column (name = "transaction_name")

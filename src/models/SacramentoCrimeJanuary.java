@@ -60,10 +60,6 @@ public class SacramentoCrimeJanuary implements java.io.Serializable {
         this.longitude = longitude;
     }
 
-
-    /**
-     * getters
-     */
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "crime_no")
