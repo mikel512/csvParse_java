@@ -81,39 +81,4 @@ public class CsvParse<T> {
         return null;
     }
 
-    // simple csv parsing using no external libraries
-/*
-    private List<T> getCsvBase(String fileName, Class<T> t){
-        String csvFile = "src/Data/" + fileName;
-        String[] columnNames = null;
-        String line = "";
-        List<T> data = new ArrayList<>();
-
-        try(BufferedReader br = new BufferedReader(new FileReader(csvFile))){
-            boolean isColumnNames = true;
-            while((line = br.readLine()) != null){
-                String[] attr = line.split("\\,");
-                if(isColumnNames){
-                    columnNames = attr;
-                    isColumnNames = false;
-                }else{
-                    Constructor<T> newEntry = getClass().getDeclaredConstructor().newInstance();
-                }
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        catch (InstantiationException e){
-            e.printStackTrace();
-        }
-        catch (IllegalAccessException e){
-            e.printStackTrace();
-        }
-
-
-        return data;
-    }
-*/
-
 }

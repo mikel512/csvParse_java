@@ -1,24 +1,26 @@
 package utilities;
 
-import java.io.BufferedReader;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
-import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
 import java.beans.Statement;
+import java.io.BufferedReader;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
-public class CsvParseBean<T> {
+/**
+ * This class supports CSV text files to be parsed into a stream of JavaBean objects of the specified type.
+ * Currently, the first line of the CSV must match the names of the properties of each Bean in order to correctly call each setter;
+ * <p>
+ * By default CsvParse supports {@code Integer, Double, Character, String,} and {@code Boolean}
+ * </p>
+ */
+public class CsvParseBean<T> implements java.io.Serializable {
     private BufferedReader reader;
     private Class<T> clazz;
-    String[] firstLine;
-    private List<Method> setters;
+    private String[] firstLine;
+    private Map<String, Method> methodCache;
     private String delimeter = ",";
-    private boolean ignoreHeader = true;
 
     private static Map<Class<?>, Function<String, ?>> PARSERS = new HashMap<>(Map.ofEntries(
             Map.entry(Integer.class, Integer::parseInt),
@@ -31,13 +33,8 @@ public class CsvParseBean<T> {
     private CsvParseBean(BufferedReader reader, Class<T> clazz){
         this.reader = reader;
         this.clazz = clazz;
-        setters = new ArrayList<>();
-        try{
-            firstLine = reader.readLine().split(delimeter);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        setBeanSetters();
+        setFirstLine();
+        methodCache = new HashMap<>();
     }
 
     /**
@@ -57,26 +54,11 @@ public class CsvParseBean<T> {
      * @return a Stream of instances of type {@code T} corresponding to each line
      */
     public Stream<T> rows(){
-        return reader.lines().skip(ignoreHeader ? 1 : 0).map(this::parseRow);
-    }
-
-    private void setBeanSetters() {
-        // get first line to create map of columns to setters
-        try {
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        return reader.lines().map(this::parseRow);
     }
 
     private T parseRow(String row){
         String[] split = row.split(delimeter);
-
-/*
-        Constructor<?> annotatedCtor = Arrays.stream(clazz.getConstructors())
-                .filter(ctor -> ctor.isAnnotationPresent(CsvParse.CsvConstructor.class))
-                .findFirst()
-                .orElseThrow();
-*/
         try {
             Object obj = clazz.getDeclaredConstructor().newInstance();
 
@@ -85,29 +67,29 @@ public class CsvParseBean<T> {
                 Statement stmt = new Statement(obj, current.getName(),
                         new Object[] {PARSERS.get(current.getParameterTypes()[0]).apply(split[i])});
                 stmt.execute();
-
             }
-            return clazz.cast(obj);
 
+            return clazz.cast(obj);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-/*
-        Class<?>[] ctorParams = annotatedCtor.getParameterTypes();
-        Object[] args = IntStream.range(0, ctorParams.length)
-                .mapToObj(i -> PARSERS.get(ctorParams[i]).apply(split[i]))
-                .toArray();
-        try {
-            return (T) annotatedCtor.newInstance(args);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-*/
         return null;
     }
 
-    private static Method findMethod(Class<?> clazz, String methodName) throws NoSuchMethodException {
+    private void setFirstLine() {
+        try{
+            firstLine = reader.readLine().toLowerCase().split(delimeter);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Method findMethod(Class<?> clazz, String methodName) throws NoSuchMethodException {
+        // First, check is method is already cached
+        if(methodCache.containsKey(methodName)) {
+            return methodCache.get(methodName);
+        }
 
         // Then loop through all available methods, checking them one by one.
         for (Method method : clazz.getMethods()) {
@@ -118,6 +100,9 @@ public class CsvParseBean<T> {
             }
             boolean match = true;
             if (match) {
+                // Add to cache then return
+                methodCache.put(methodName, method);
+
                 return method;
             }
 
