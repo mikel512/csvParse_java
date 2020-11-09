@@ -1,11 +1,11 @@
-package models;
+package com.parse.models;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table (name = "sacramentorealestatetransactions")
-public class SacramentoRealEstateTransactions {
+public class Sacramentorealestatetransactions {
     private Long id;
     private String street;
     private String city;

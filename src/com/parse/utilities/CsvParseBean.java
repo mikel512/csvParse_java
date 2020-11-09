@@ -1,4 +1,4 @@
-package utilities;
+package com.parse.utilities;
 
 import java.beans.Statement;
 import java.io.BufferedReader;

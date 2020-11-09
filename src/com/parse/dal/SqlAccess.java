@@ -1,4 +1,4 @@
-package DAL;
+package com.parse.dal;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

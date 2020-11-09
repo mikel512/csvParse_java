@@ -1,4 +1,4 @@
-package models;
+package com.parse.models;
 
 public class Distribution {
     String _mediaType;

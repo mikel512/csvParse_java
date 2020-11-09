@@ -1,11 +1,11 @@
-package models;
+package com.parse.models;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table (name = "salesjan2009")
-public class SalesJan implements java.io.Serializable{
+public class SalesJan2009 implements java.io.Serializable{
     private Long id;
     private Date transaction_date;
     private String product;
@@ -20,8 +20,12 @@ public class SalesJan implements java.io.Serializable{
     private int latitude;
     private int longitude;
 
-    public SalesJan() {
+    public SalesJan2009() {
 
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setTransaction_date(Date transaction_date) {

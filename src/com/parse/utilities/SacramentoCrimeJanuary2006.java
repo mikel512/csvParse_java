@@ -1,10 +1,10 @@
-package models;
+package com.parse.utilities;
 
 import javax.persistence.*;
 
 @Entity
 @Table (name = "sacramentocrimejanuary2006")
-public class SacramentoCrimeJanuary implements java.io.Serializable {
+public class SacramentoCrimeJanuary2006 implements java.io.Serializable {
     private Long id;
     private String cdatetime;      // Date
     private String address;
@@ -16,7 +16,7 @@ public class SacramentoCrimeJanuary implements java.io.Serializable {
     private Double latitude;
     private Double longitude;
 
-    public SacramentoCrimeJanuary() {
+    public SacramentoCrimeJanuary2006() {
         //for hibernate use
     }
 

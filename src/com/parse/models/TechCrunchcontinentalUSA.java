@@ -1,11 +1,11 @@
-package models;
+package com.parse.models;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table (name = "techcrunchcontinentalusa")
-public class TechCrunchContinentalUsa implements java.io.Serializable {
+public class TechCrunchcontinentalUSA implements java.io.Serializable {
     private Long id;
     private String permalink;
     private String company;
@@ -18,7 +18,11 @@ public class TechCrunchContinentalUsa implements java.io.Serializable {
     private String raisedcurrency;
     private String round;
 
-    public TechCrunchContinentalUsa() {}
+    public TechCrunchcontinentalUSA() {}
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public void setState(String state) {
         this.state = state;

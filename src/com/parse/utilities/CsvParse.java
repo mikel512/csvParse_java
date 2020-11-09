@@ -1,4 +1,4 @@
-package utilities;
+package com.parse.utilities;
 
 import java.io.*;
 import java.lang.annotation.ElementType;

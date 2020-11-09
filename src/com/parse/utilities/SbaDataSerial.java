@@ -1,9 +1,9 @@
-package utilities;
+package com.parse.utilities;
 
-import models.ContactPoint;
-import models.Distribution;
-import models.Publisher;
-import models.SbaData;
+import com.parse.models.ContactPoint;
+import com.parse.models.Distribution;
+import com.parse.models.Publisher;
+import com.parse.models.SbaData;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
