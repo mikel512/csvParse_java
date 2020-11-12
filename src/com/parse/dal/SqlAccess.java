@@ -6,8 +6,8 @@ import org.hibernate.SessionFactory;
 import java.util.stream.Stream;
 
 public class SqlAccess<T> {
-    private SessionFactory sessionFactory;
-    private Stream<T> objectStream;
+    private final SessionFactory sessionFactory;
+    private final Stream<T> objectStream;
 
     private SqlAccess (Stream<T> objectStream,SessionFactory sessionFactory) {
         this.objectStream = objectStream;
@@ -31,7 +31,7 @@ public class SqlAccess<T> {
     public void insertObjects() {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        objectStream.forEach(o -> session.save(o));
+        objectStream.forEach(session::save);
         session.getTransaction().commit();
         session.close();
 

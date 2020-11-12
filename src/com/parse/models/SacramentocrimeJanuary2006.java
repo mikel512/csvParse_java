@@ -1,6 +1,6 @@
-package com.parse.models 
+package com.parse.models; 
 
-import javax.persistence.* 
+import javax.persistence.*; 
 
 @Entity 
 @Table (name ="sacramentocrimejanuary2006") 
@@ -22,6 +22,8 @@ public class SacramentocrimeJanuary2006 implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@Id
+	@GeneratedValue (generator = "increment")
 	@Column (name = "id")
 	public Long getId() {
 		 return id;
@@ -107,5 +109,6 @@ public class SacramentocrimeJanuary2006 implements java.io.Serializable {
 	public String getLongitude() {
 		 return longitude;
 	}
+
 
  }

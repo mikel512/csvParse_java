@@ -1,148 +1,144 @@
-package com.parse.models;
+package com.parse.models; 
 
-import javax.persistence.*;
-import java.sql.Date;
+import javax.persistence.*; 
 
-@Entity
-@Table (name = "salesjan2009")
-public class SalesJan2009 implements java.io.Serializable{
-    private Long id;
-    private Date transaction_date;
-    private String product;
-    private int price;
-    private String payment_type;
-    private String name;
-    private String city;
-    private String state;
-    private String country;
-    private Date account_created;
-    private Date last_login;
-    private int latitude;
-    private int longitude;
+@Entity 
+@Table (name ="salesjan2009") 
+public class SalesJan2009 implements java.io.Serializable { 
+	private Long id; 
+ 	private String transaction_date;
+ 	private String product;
+ 	private String price;
+ 	private String payment_type;
+ 	private String name;
+ 	private String city;
+ 	private String state;
+ 	private String country;
+ 	private String account_created;
+ 	private String last_login;
+ 	private String latitude;
+ 	private String longitude;
 
-    public SalesJan2009() {
+	public SalesJan2009() {}
 
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Id
+	@GeneratedValue (generator = "increment")
+	@Column (name = "id")
+	public Long getId() {
+		 return id;
+	}
 
-    public void setTransaction_date(Date transaction_date) {
-        this.transaction_date = transaction_date;
-    }
+	public void setTransaction_date(String transaction_date) {
+		this.transaction_date = transaction_date;
+	}
 
-    public void setLatitude(int latitude) {
-        this.latitude = latitude;
-    }
+	@Column (name = "transaction_date")
+	public String getTransaction_date() {
+		 return transaction_date;
+	}
 
-    public void setLongitude(int longitude) {
-        this.longitude = longitude;
-    }
+	public void setProduct(String product) {
+		this.product = product;
+	}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	@Column (name = "product")
+	public String getProduct() {
+		 return product;
+	}
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
+	public void setPrice(String price) {
+		this.price = price;
+	}
 
-    public void setAccount_created(Date account_created) {
-        this.account_created = account_created;
-    }
+	@Column (name = "price")
+	public String getPrice() {
+		 return price;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setPayment_type(String payment_type) {
+		this.payment_type = payment_type;
+	}
 
-    public void setLast_login(Date last_login) {
-        this.last_login = last_login;
-    }
+	@Column (name = "payment_type")
+	public String getPayment_type() {
+		 return payment_type;
+	}
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setProduct(String product) {
-        this.product = product;
-    }
+	@Column (name = "name")
+	public String getName() {
+		 return name;
+	}
 
-    public void setState(String state) {
-        this.state = state;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    public void setPayment_type(String payment_type) {
-        this.payment_type = payment_type;
-    }
+	@Column (name = "city")
+	public String getCity() {
+		 return city;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	@Column (name = "state")
+	public String getState() {
+		 return state;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	@Column (name = "country")
+	public String getCountry() {
+		 return country;
+	}
+
+	public void setAccount_created(String account_created) {
+		this.account_created = account_created;
+	}
+
+	@Column (name = "account_created")
+	public String getAccount_created() {
+		 return account_created;
+	}
+
+	public void setLast_login(String last_login) {
+		this.last_login = last_login;
+	}
+
+	@Column (name = "last_login")
+	public String getLast_login() {
+		 return last_login;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	@Column (name = "latitude")
+	public String getLatitude() {
+		 return latitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	@Column (name = "longitude")
+	public String getLongitude() {
+		 return longitude;
+	}
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "sale_no")
-    public Long getId() {
-        return id;
-    }
-
-    @Column (name = "transaction_name")
-    public Date getAccount_created() {
-        return account_created;
-    }
-
-    @Column (name = "last_login")
-    public Date getLast_login() {
-        return last_login;
-    }
-
-    @Column (name = "country")
-    public String getCountry() {
-        return country;
-    }
-
-    @Column (name = "transaction_date")
-    public Date getTransaction_date() {
-        return transaction_date;
-    }
-
-    @Column (name = "latitude")
-    public int getLatitude() {
-        return latitude;
-    }
-
-    @Column (name = "longitude")
-    public int getLongitude() {
-        return longitude;
-    }
-
-    @Column (name = "price")
-    public int getPrice() {
-        return price;
-    }
-
-    @Column (name = "city")
-    public String getCity() {
-        return city;
-    }
-
-    @Column (name = "name")
-    public String getName() {
-        return name;
-    }
-
-    @Column (name = "payment_type")
-    public String getPayment_type() {
-        return payment_type;
-    }
-
-    @Column (name = "product")
-    public String getProduct() {
-        return product;
-    }
-
-    @Column (name = "state")
-    public String getState() {
-        return state;
-    }
-
-}
-
+ }

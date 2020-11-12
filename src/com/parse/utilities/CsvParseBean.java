@@ -16,13 +16,13 @@ import java.util.stream.Stream;
  * </p>
  */
 public class CsvParseBean<T> implements java.io.Serializable {
-    private BufferedReader reader;
-    private Class<T> clazz;
+    private final BufferedReader reader;
+    private final Class<T> clazz;
     private String[] firstLine;
-    private Map<String, Method> methodCache;
-    private String delimeter = ",";
+    private final Map<String, Method> methodCache;
+    private final String delimeter = ",";
 
-    private static Map<Class<?>, Function<String, ?>> PARSERS = new HashMap<>(Map.ofEntries(
+    private static final Map<Class<?>, Function<String, ?>> PARSERS = new HashMap<>(Map.ofEntries(
             Map.entry(Integer.class, Integer::parseInt),
             Map.entry(Double.class, Double::parseDouble),
             Map.entry(Character.class, s -> s.charAt(0)),
@@ -98,13 +98,10 @@ public class CsvParseBean<T> implements java.io.Serializable {
             if (!methodName.equals(name)) { // The method must have right name.
                 continue;
             }
-            boolean match = true;
-            if (match) {
-                // Add to cache then return
-                methodCache.put(methodName, method);
+            // Add to cache then return
+            methodCache.put(methodName, method);
 
-                return method;
-            }
+            return method;
 
         }
 

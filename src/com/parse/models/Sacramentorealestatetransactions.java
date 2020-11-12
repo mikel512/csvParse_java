@@ -1,141 +1,144 @@
-package com.parse.models;
+package com.parse.models; 
 
-import javax.persistence.*;
-import java.sql.Date;
+import javax.persistence.*; 
 
-@Entity
-@Table (name = "sacramentorealestatetransactions")
-public class Sacramentorealestatetransactions {
-    private Long id;
-    private String street;
-    private String city;
-    private String state;
-    private String zip;
-    private Integer beds;
-    private Integer baths;
-    private Integer sq_feet;
-    private String type;
-    private Date sale_date;
-    private Integer price;
-    private Integer latitude;
-    private Integer longitude;
+@Entity 
+@Table (name ="sacramentorealestatetransactions") 
+public class Sacramentorealestatetransactions implements java.io.Serializable { 
+	private Long id; 
+ 	private String street;
+ 	private String city;
+ 	private String zip;
+ 	private String state;
+ 	private String beds;
+ 	private String baths;
+ 	private String sq__ft;
+ 	private String type;
+ 	private String sale_date;
+ 	private String price;
+ 	private String latitude;
+ 	private String longitude;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Sacramentorealestatetransactions() {}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setState(String state) {
-        this.state = state;
-    }
+	@Id
+	@GeneratedValue (generator = "increment")
+	@Column (name = "id")
+	public Long getId() {
+		 return id;
+	}
 
-    public void setLongitude(Integer longitude) {
-        this.longitude = longitude;
-    }
+	public void setStreet(String street) {
+		this.street = street;
+	}
 
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
+	@Column (name = "street")
+	public String getStreet() {
+		 return street;
+	}
 
-    public void setLatitude(Integer latitude) {
-        this.latitude = latitude;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    public void setBaths(Integer baths) {
-        this.baths = baths;
-    }
+	@Column (name = "city")
+	public String getCity() {
+		 return city;
+	}
 
-    public void setBeds(Integer beds) {
-        this.beds = beds;
-    }
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
 
-    public void setSale_date(Date sale_date) {
-        this.sale_date = sale_date;
-    }
+	@Column (name = "zip")
+	public String getZip() {
+		 return zip;
+	}
 
-    public void setSq_feet(Integer sq_feet) {
-        this.sq_feet = sq_feet;
-    }
+	public void setState(String state) {
+		this.state = state;
+	}
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
+	@Column (name = "state")
+	public String getState() {
+		 return state;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public void setBeds(String beds) {
+		this.beds = beds;
+	}
 
-    public void setZip(String zip) {
-        this.zip = zip;
-    }
+	@Column (name = "beds")
+	public String getBeds() {
+		 return beds;
+	}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "transaction_no")
-    public Long getId() {
-        return id;
-    }
+	public void setBaths(String baths) {
+		this.baths = baths;
+	}
 
-    @Column (name = "city")
-    public String getCity() {
-        return city;
-    }
+	@Column (name = "baths")
+	public String getBaths() {
+		 return baths;
+	}
 
-    @Column (name = "state")
-    public String getState() {
-        return state;
-    }
+	public void setSq__ft(String sq__ft) {
+		this.sq__ft = sq__ft;
+	}
 
-    @Column (name = "sale_date")
-    public Date getSale_date() {
-        return sale_date;
-    }
+	@Column (name = "sq__ft")
+	public String getSq__ft() {
+		 return sq__ft;
+	}
 
-    @Column (name = "baths")
-    public Integer getBaths() {
-        return baths;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    @Column (name = "beds")
-    public Integer getBeds() {
-        return beds;
-    }
+	@Column (name = "type")
+	public String getType() {
+		 return type;
+	}
 
-    @Column (name = "latitude")
-    public Integer getLatitude() {
-        return latitude;
-    }
+	public void setSale_date(String sale_date) {
+		this.sale_date = sale_date;
+	}
 
-    @Column (name = "longitude")
-    public Integer getLongitude() {
-        return longitude;
-    }
+	@Column (name = "sale_date")
+	public String getSale_date() {
+		 return sale_date;
+	}
 
-    @Column (name = "price")
-    public Integer getPrice() {
-        return price;
-    }
+	public void setPrice(String price) {
+		this.price = price;
+	}
 
-    @Column (name = "sq_feet")
-    public Integer getSq_feet() {
-        return sq_feet;
-    }
+	@Column (name = "price")
+	public String getPrice() {
+		 return price;
+	}
 
-    @Column (name = "street")
-    public String getStreet() {
-        return street;
-    }
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
 
-    @Column (name = "type")
-    public String getType() {
-        return type;
-    }
+	@Column (name = "latitude")
+	public String getLatitude() {
+		 return latitude;
+	}
 
-    @Column (name = "zip")
-    public String getZip() {
-        return zip;
-    }
-}
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	@Column (name = "longitude")
+	public String getLongitude() {
+		 return longitude;
+	}
+
+
+ }

@@ -1,123 +1,124 @@
-package com.parse.models;
+package com.parse.models; 
 
-import javax.persistence.*;
-import java.sql.Date;
+import javax.persistence.*; 
 
-@Entity
-@Table (name = "techcrunchcontinentalusa")
-public class TechCrunchcontinentalUSA implements java.io.Serializable {
-    private Long id;
-    private String permalink;
-    private String company;
-    private int numempls;
-    private String category;
-    private String city;
-    private String state;
-    private Date fundedDate;
-    private int raisedamt;
-    private String raisedcurrency;
-    private String round;
+@Entity 
+@Table (name ="techcrunchcontinentalusa") 
+public class TechCrunchcontinentalUSA implements java.io.Serializable { 
+	private Long id; 
+ 	private String permalink;
+ 	private String company;
+ 	private String numemps;
+ 	private String category;
+ 	private String city;
+ 	private String state;
+ 	private String fundeddate;
+ 	private String raisedamt;
+ 	private String raisedcurrency;
+ 	private String round;
 
-    public TechCrunchcontinentalUSA() {}
+	public TechCrunchcontinentalUSA() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setState(String state) {
-        this.state = state;
-    }
+	@Id
+	@GeneratedValue (generator = "increment")
+	@Column (name = "id")
+	public Long getId() {
+		 return id;
+	}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+	public void setPermalink(String permalink) {
+		this.permalink = permalink;
+	}
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+	@Column (name = "permalink")
+	public String getPermalink() {
+		 return permalink;
+	}
 
-    public void setCompany(String company) {
-        this.company = company;
-    }
+	public void setCompany(String company) {
+		this.company = company;
+	}
 
-    public void setFundedDate(Date fundedDate) {
-        this.fundedDate = fundedDate;
-    }
+	@Column (name = "company")
+	public String getCompany() {
+		 return company;
+	}
 
-    public void setNumempls(int numempls) {
-        this.numempls = numempls;
-    }
+	public void setNumemps(String numemps) {
+		this.numemps = numemps;
+	}
 
-    public void setPermalink(String permalink) {
-        this.permalink = permalink;
-    }
+	@Column (name = "numemps")
+	public String getNumemps() {
+		 return numemps;
+	}
 
-    public void setRaisedamt(int raisedamt) {
-        this.raisedamt = raisedamt;
-    }
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-    public void setRaisedcurrency(String raisedcurrency) {
-        this.raisedcurrency = raisedcurrency;
-    }
+	@Column (name = "category")
+	public String getCategory() {
+		 return category;
+	}
 
-    public void setRound(String round) {
-        this.round = round;
-    }
+	public void setCity(String city) {
+		this.city = city;
+	}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "rec_no")
-    public Long getId() {
-        return id;
-    }
+	@Column (name = "city")
+	public String getCity() {
+		 return city;
+	}
 
-    @Column (name = "raised_amount")
-    public int getRaisedamt() {
-        return raisedamt;
-    }
+	public void setState(String state) {
+		this.state = state;
+	}
 
-    @Column (name = "raised_currency")
-    public String getRaisedcurrency() {
-        return raisedcurrency;
-    }
+	@Column (name = "state")
+	public String getState() {
+		 return state;
+	}
 
-    @Column (name = "state")
-    public String getState() {
-        return state;
-    }
+	public void setFundeddate(String fundeddate) {
+		this.fundeddate = fundeddate;
+	}
 
-    @Column (name = "city")
-    public String getCity() {
-        return city;
-    }
+	@Column (name = "fundeddate")
+	public String getFundeddate() {
+		 return fundeddate;
+	}
 
-    @Column (name = "funded_date")
-    public Date getFundedDate() {
-        return fundedDate;
-    }
+	public void setRaisedamt(String raisedamt) {
+		this.raisedamt = raisedamt;
+	}
 
-    @Column (name = "num_empls")
-    public int getNumempls() {
-        return numempls;
-    }
+	@Column (name = "raisedamt")
+	public String getRaisedamt() {
+		 return raisedamt;
+	}
 
-    @Column (name = "category")
-    public String getCategory() {
-        return category;
-    }
+	public void setRaisedcurrency(String raisedcurrency) {
+		this.raisedcurrency = raisedcurrency;
+	}
 
-    @Column (name = "company")
-    public String getCompany() {
-        return company;
-    }
+	@Column (name = "raisedcurrency")
+	public String getRaisedcurrency() {
+		 return raisedcurrency;
+	}
 
-    @Column (name = "permalink")
-    public String getPermalink() {
-        return permalink;
-    }
+	public void setRound(String round) {
+		this.round = round;
+	}
 
-    @Column (name = "round")
-    public String getRound() {
-        return round;
-    }
-}
+	@Column (name = "round")
+	public String getRound() {
+		 return round;
+	}
+
+
+ }
