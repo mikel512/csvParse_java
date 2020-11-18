@@ -1,6 +1,7 @@
 package com.parse.utilities;
 
 import java.io.*;
+import java.util.Map;
 
 /**
  * This class creates a .java file which contains a class adhering to the JavaBean standard from a CSV file
@@ -10,6 +11,19 @@ import java.io.*;
  */
 public class CreateClassFileFromCsv {
     private boolean annotations = true;
+
+    private CreateClassFileFromCsv() {}
+
+    public static CreateClassFileFromCsv newInstance() {
+        return new CreateClassFileFromCsv();
+    }
+
+    public void createAll(Map<String, File> map) {
+        for (Map.Entry<String, File> pair : map.entrySet()) {
+            // create JavaBean
+            createFile(pair.getValue());
+        }
+    }
 
     public CreateClassFileFromCsv withoutAnnotations() {
         this.annotations = false;
