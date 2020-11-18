@@ -6,5 +6,5 @@
     <!-- Boolean - mark true if automatic annotations needed on first run -->
     <entry key="addAnnotatedClassesToSession">true</entry>
     <!-- PATH - file path of data folder -->
-    <entry key="dataPath">C:\Users\mikel\Documents\repo\data</entry>
+    <entry key="dataPath">C:\Users\mikel\Documents\repo\csvParse\backup\test</entry>
 </properties>

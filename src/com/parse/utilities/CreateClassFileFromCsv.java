@@ -18,7 +18,7 @@ public class CreateClassFileFromCsv {
 
     public void createFile(File csvFile) {
         String name = csvFile.getName().substring(0, csvFile.getName().lastIndexOf('.'));
-        File file = createJavaFile(name);
+        File file = createJavaFile("_" + name);
         try{
             String[] firstLn = new BufferedReader(new FileReader(csvFile)).readLine().split(",");
             writeClass(file, firstLn, name);
@@ -35,9 +35,9 @@ public class CreateClassFileFromCsv {
             if(annotations) {
                 writer.write("import javax.persistence.*; \n\n" );
                 writer.write("@Entity \n");
-                writer.write("@Table (name =" + "\""+ csvName.toLowerCase() + "\") \n" );
+                writer.write("@Table (name =" + "\"_"+ csvName.toLowerCase() + "\") \n" );
             }
-            writer.write("public class " + csvName + " implements java.io.Serializable { \n");
+            writer.write("public class _" + csvName + " implements java.io.Serializable { \n");
 
             // write private props
             writer.write("\tprivate Long id; \n");
@@ -46,7 +46,7 @@ public class CreateClassFileFromCsv {
             }
 
             // write default constructor
-            writer.write("\n\tpublic " + csvName + "() {}\n\n");
+            writer.write("\n\tpublic _" + csvName + "() {}\n\n");
 
             // generate getters and setters
             writer.write(createGetterSetter("id" , true));
@@ -78,7 +78,7 @@ public class CreateClassFileFromCsv {
             result += "\t@GeneratedValue (generator = \"increment\")\n";
             result += "\t@Column (name = \"" + propName + "\")\n";
         } else if (annotations) {
-            result += "\t@Column (name = \"" + propName + "\")\n";
+            result += "\t@Column (name = \"" + propName + "\", length = 2048)\n";
         }
         if(isId){
             result += "\tpublic Long get" + capitalize + "() {\n";

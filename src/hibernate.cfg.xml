@@ -15,7 +15,7 @@
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/records</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/csv_test</property>
         <property name="connection.username">user1</property>
         <property name="connection.password">password123</property>
 

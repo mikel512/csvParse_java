@@ -26,13 +26,15 @@ public class Main {
          */
 
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure().build();
-        final SessionFactory sessionFactory;
+                .configure()
+                .build();
+        SessionFactory sessionFactory;
         MetadataSources sources= new MetadataSources(registry);
-        Map<String, File> files = getData(properties);
+        Map<String, File> files = new HashMap<>();
+        getData(properties.getProperty("dataPath"), files);
 
         if(Boolean.parseBoolean(properties.getProperty("generateBeans"))) {
-            createBeans(files);
+            //createBeans(files);
         }
         if(Boolean.parseBoolean(properties.getProperty("addAnnotatedClassesToSession"))) {
             addClassesToSession(files, sources);
@@ -55,7 +57,7 @@ public class Main {
     private static void addClassesToSession(Map<String, File> files, MetadataSources sources) {
         for (Map.Entry<String, File> pair : files.entrySet()) {
             try {
-                Class<?> clazz = Class.forName("com.parse.models." + pair.getKey());
+                Class<?> clazz = Class.forName("com.parse.models._" + pair.getKey());
                 var a = clazz.getDeclaredConstructor().newInstance();
                 sources.addAnnotatedClass(a.getClass());
             } catch (Exception e) {
@@ -68,9 +70,12 @@ public class Main {
         for (Map.Entry<String, File> pair : files.entrySet()) {
             try {
                 BufferedReader br = new BufferedReader(new FileReader(pair.getValue()));
-                Class<?> clazz = Class.forName("com.parse.models." + pair.getKey());
+                Class<?> clazz = Class.forName("com.parse.models._" + pair.getKey());
                 CsvParseBean<?> parseBean = CsvParseBean.newInstance(br, clazz);
                 var rows = parseBean.rows();
+/*
+                rows.forEach(i -> System.out.println(i));
+*/
                 SqlAccess<?> sqlAccess = SqlAccess.newInstance(rows, sessionFactory);
                 sqlAccess.insertObjects();
             } catch (Exception e) {
@@ -79,16 +84,19 @@ public class Main {
         }
     }
 
-    private static Map<String, File> getData(Properties properties) {
-        Map<String, File> result = new HashMap<>();
-        File dir = new File(properties.getProperty("dataPath"));
-        File[] files = dir.listFiles((dir1, name) -> name.endsWith(".csv"));
+    private static void getData(String dirName, Map<String, File>  fileMap) {
+        File dir = new File(dirName);
+        File[] files = dir.listFiles();
         assert files != null;
-        for(File csv : files) {
-            String name = csv.getName().substring(0, csv.getName().lastIndexOf('.'));
-            result.put(name, csv);
+        for(File file : files) {
+            if(file.isFile() && file.getName().endsWith(".csv")) {
+                String name = file.getName().substring(0, file.getName().lastIndexOf('.'));
+                fileMap.put(name, file);
+            }
+            else if (file.isDirectory()) {
+                getData(file.getAbsolutePath(), fileMap);
+            }
         }
-        return result;
     }
 
     private static Properties setProperties() {

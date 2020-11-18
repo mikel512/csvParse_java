@@ -3,10 +3,13 @@ package com.parse.utilities;
 import java.beans.Statement;
 import java.io.BufferedReader;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
+import org.apache.commons.text.StringEscapeUtils;
 
 /**
  * This class supports CSV text files to be parsed into a stream of JavaBean objects of the specified type.
@@ -58,14 +61,15 @@ public class CsvParseBean<T> implements java.io.Serializable {
     }
 
     private T parseRow(String row){
-        String[] split = row.split(delimeter);
+        List<String> split = splitEscape(row);
         try {
             Object obj = clazz.getDeclaredConstructor().newInstance();
 
             for (int i = 0; i < firstLine.length; i++) {
+                if(split.size() < firstLine.length) break;
                 Method current = findMethod(clazz, "set" + firstLine[i].substring(0,1).toUpperCase() + firstLine[i].substring(1));
                 Statement stmt = new Statement(obj, current.getName(),
-                        new Object[] {PARSERS.get(current.getParameterTypes()[0]).apply(split[i])});
+                        new Object[] {PARSERS.get(current.getParameterTypes()[0]).apply(split.get(i))});
                 stmt.execute();
             }
 
@@ -75,6 +79,32 @@ public class CsvParseBean<T> implements java.io.Serializable {
         }
 
         return null;
+    }
+
+    private List<String> splitEscape(String row) {
+        List<String> tokensList = new ArrayList<String>();
+        boolean inQuotes = false;
+        StringBuilder b = new StringBuilder();
+        for (char c : row.toCharArray()) {
+            switch (c) {
+                case ',':
+                    if (inQuotes) {
+                        b.append(c);
+                    } else {
+                        tokensList.add(StringEscapeUtils.unescapeCsv(b.toString()));
+                        b = new StringBuilder();
+                    }
+                    break;
+                case '\"':
+                    inQuotes = !inQuotes;
+                default:
+                    b.append(c);
+                    break;
+            }
+        }
+        tokensList.add(StringEscapeUtils.unescapeCsv(b.toString()));
+
+        return tokensList;
     }
 
     private void setFirstLine() {
